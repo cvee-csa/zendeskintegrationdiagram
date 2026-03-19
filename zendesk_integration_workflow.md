@@ -21,7 +21,7 @@ flowchart TD
 
     subgraph MCPServer[zendeskmcp Workflow]
         B1[Start: MCP Server Launched]
-        B2[Receive API Request \"from Claude or User\"]
+        B2[Receive API Request from Claude or User]
         B3[Authenticate & Connect to Zendesk]
         B4[Fetch/Manage Tickets, Comments, Knowledge Base]
         B5[Process Request: Analysis, Draft, or Data]
