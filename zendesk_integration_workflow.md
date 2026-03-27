@@ -6,17 +6,18 @@ This diagram illustrates how the `zendeskopenticketreport` and `zendeskmcp` work
 
 ```mermaid
 flowchart TD
-    subgraph OpenTicketReport[zendeskopenticketreport Workflow]
-        A1[Start: GitHub Actions Trigger or Manual Run]
-        A2[Set up Python Environment]
-        A3[Install Dependencies]
-        A4[Run Report Script]
-        A5[Fetch Open Tickets from Zendesk API]
-        A6[Apply Heuristics & Analyze Tickets]
-        A7[Generate Excel Report]
-        A8[Upload Report as Artifact or to Google Drive]
+    subgraph OpenTicketReport[zendeskopenticketreport Workflows]
+        A0[Trigger: external cron dispatch or manual workflow_dispatch]
+        A1[Check out repository]
+        A2[Set up Python 3.11]
+        A3[Install dependencies]
+        A4[Run ESC/RARC report or title suggestion script]
+        A5[Fetch open tickets from Zendesk API]
+        A6[Analyze tickets and build report]
+        A7[Generate Excel report]
+        A8[Upload artifact or optional Google Drive upload]
         A9[End]
-        A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8 --> A9
+        A0 --> A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8 --> A9
     end
 
     subgraph MCPServer[zendeskmcp Workflow]
@@ -40,6 +41,6 @@ flowchart TD
 
 **Legend:**
 - Both workflows interact with Zendesk via API calls.
-- `zendeskopenticketreport` is focused on automated reporting and ticket analysis, triggered by GitHub Actions or manually.
+- `zendeskopenticketreport` uses two GitHub Actions workflows: `zendeskreport_esc-rarc.yml` (external cron dispatch via `workflow_dispatch`) and `zendeskreport_ticket-title-recommendations.yml` (manual `workflow_dispatch`).
 - `zendeskmcp` runs as a server, providing API endpoints for ticket management, analysis, and integration with tools like Claude.
 
