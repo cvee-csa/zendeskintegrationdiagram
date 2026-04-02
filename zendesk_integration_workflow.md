@@ -11,7 +11,7 @@ flowchart TD
         A1[Check out repository]
         A2[Set up Python 3.11]
         A3[Install dependencies]
-        A4[Run ESC/RARC report or title suggestion script]
+        A4[Run ESC/RARC report script]
         A5[Fetch open tickets from Zendesk API]
         A6[Analyze tickets and build report]
         A7[Generate Excel report]
@@ -41,6 +41,6 @@ flowchart TD
 
 **Legend:**
 - Both workflows interact with Zendesk via API calls.
-- `zendeskopenticketreport` uses two GitHub Actions workflows: `zendeskreport_esc-rarc.yml` (external cron dispatch via `workflow_dispatch`) and `zendeskreport_ticket-title-recommendations.yml` (manual `workflow_dispatch`).
+- `zendeskopenticketreport` uses a GitHub Actions workflow: `zendeskreport_esc-rarc.yml`, which is triggered via `workflow_dispatch` and may be externally dispatched on a schedule.
 - `zendeskmcp` runs as a server, providing API endpoints for ticket management, analysis, and integration with tools like Claude.
 
